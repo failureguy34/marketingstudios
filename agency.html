@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creativa Marketing Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.244.0/dist/lucide.min.js"></script>
+  <style>
+    :root{
+      --teal:#53E0BC;
+      --dark:#0F3460;
+      --dark-2:#1A1A2E;
+      --background: 0 0% 100%;
+      --foreground: 0 0% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 0 0% 3.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 0 0% 3.9%;
+      --primary: 0 0% 9%;
+      --primary-foreground: 0 0% 98%;
+      --secondary: 0 0% 96.1%;
+      --secondary-foreground: 0 0% 9%;
+      --muted: 0 0% 96.1%;
+      --muted-foreground: 0 0% 45.1%;
+      --accent: 0 0% 96.1%;
+      --accent-foreground: 0 0% 9%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 0 0% 89.8%;
+      --input: 0 0% 89.8%;
+      --ring: 0 0% 3.9%;
+      --chart-1: 12 76% 61%;
+      --chart-2: 173 58% 39%;
+      --chart-3: 197 37% 24%;
+      --chart-4: 43 74% 66%;
+      --chart-5: 27 87% 67%;
+      --radius: 0.5rem;
+      --sidebar-background: 0 0% 98%;
+      --sidebar-foreground: 240 5.3% 26.1%;
+      --sidebar-primary: 240 5.9% 10%;
+      --sidebar-primary-foreground: 0 0% 98%;
+      --sidebar-accent: 240 4.8% 95.9%;
+      --sidebar-accent-foreground: 240 5.9% 10%;
+      --sidebar-border: 220 13% 91%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
+    }
+
+    .dark{
+      --background: 0 0% 3.9%;
+      --foreground: 0 0% 98%;
+      --card: 0 0% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --popover: 0 0% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 0 0% 9%;
+      --secondary: 0 0% 14.9%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 0 0% 14.9%;
+      --muted-foreground: 0 0% 63.9%;
+      --accent: 0 0% 14.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 0 0% 14.9%;
+      --input: 0 0% 14.9%;
+      --ring: 0 0% 83.1%;
+      --chart-1: 220 70% 50%;
+      --chart-2: 160 60% 45%;
+      --chart-3: 30 80% 55%;
+      --chart-4: 280 65% 60%;
+      --chart-5: 340 75% 55%;
+      --sidebar-background: 240 5.9% 10%;
+      --sidebar-foreground: 240 4.8% 95.9%;
+      --sidebar-primary: 224.3 76.3% 48%;
+      --sidebar-primary-foreground: 0 0% 100%;
+      --sidebar-accent: 240 3.7% 15.9%;
+      --sidebar-accent-foreground: 240 4.8% 95.9%;
+      --sidebar-border: 240 3.7% 15.9%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
+    }
+    *{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    html{scroll-behavior:smooth}
+    /* simple animation utilities to mimic framer-motion timing used in React code */
+    .fade-in{animation:fadeIn .9s ease forwards;opacity:0}
+    .fade-up{animation:fadeUp .8s ease forwards;opacity:0}
+    .float-bob{animation:floatBob 2s ease-in-out infinite}
+    .pulse-dot{animation:dotPulse 1.2s infinite}
+
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+    @keyframes floatBob{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+    @keyframes dotPulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}100%{transform:scale(1);opacity:1}}
+
+    /* Background circles animations */
+    .bg-circle-1{position:absolute;width:24rem;height:24rem;border-radius:9999px;right:-5%;top:-10%;background:var(--teal);opacity:.08;animation:rotScale 20s ease-in-out infinite}
+    .bg-circle-2{position:absolute;width:18rem;height:18rem;border-radius:9999px;left:-5%;bottom:-5%;background:var(--teal);opacity:.08;animation:rotScaleReverse 15s ease-in-out infinite}
+    .bg-circle-3{position:absolute;width:12rem;height:12rem;border-radius:9999px;left:30%;top:40%;background:var(--teal);opacity:.05;animation:moveXY 10s ease-in-out infinite}
+
+    @keyframes rotScale{0%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.2) rotate(90deg)}100%{transform:scale(1) rotate(0deg)}}
+    @keyframes rotScaleReverse{0%{transform:scale(1.2) rotate(0deg)}50%{transform:scale(1) rotate(-90deg)}100%{transform:scale(1.2) rotate(0deg)}}
+    @keyframes moveXY{0%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}100%{transform:translate(0,0)}}
+
+    /* Hero headline gradient highlight */
+    .highlight{color:var(--teal)}
+
+    /* Chevron bounce */
+    .chev-bounce{animation:chev 2s infinite}
+    @keyframes chev{0%{transform:translateY(0)}50%{transform:translateY(10px)}100%{transform:translateY(0)}}
+
+    /* small custom styles for sections and cards */
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); }
+    .card-hover:hover{transform:translateY(-8px)}
+
+    /* audio progress sim */
+    .progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden}
+    .progress-fill{height:100%;background:var(--teal);width:0%}
+
+    /* Toasts */
+    #toastContainer{position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+    .toast{min-width:220px;background:rgba(15,52,96,0.95);color:white;padding:12px 14px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.25);display:flex;align-items:center;gap:10px}
+    .toast.success{background:linear-gradient(90deg,var(--teal),#38B89A)}
+    .toast .close{margin-left:auto;cursor:pointer;opacity:.9}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9998}
+    .modal{background:white;border-radius:16px;max-width:720px;width:96%;padding:20px}
+
+    /* Simple carousel */
+    .carousel{position:relative;overflow:hidden;border-radius:12px}
+    .carousel-track{display:flex;transition:transform .5s ease}
+    .carousel-slide{min-width:100%;flex-shrink:0}
+    .carousel-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 8px}
+    .carousel-btn{background:rgba(0,0,0,0.5);color:white;border-radius:999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+
+    /* Accordion */
+    .accordion-item{border-bottom:1px solid rgba(0,0,0,0.06)}
+    .accordion-trigger{cursor:pointer;padding:12px 0;display:flex;justify-content:space-between;align-items:center}
+
+    /* Tabs */
+    .tabs{display:flex;gap:8px}
+    .tab{padding:8px 12px;border-radius:999px;cursor:pointer}
+    .tab.active{background:var(--teal);color:var(--dark);font-weight:700}
+
+    /* Tooltip */
+    [data-tooltip]{position:relative}
+    [data-tooltip]:hover::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;background:#111;color:#fff;padding:6px 8px;border-radius:6px;font-size:12px}
+
+    /* Scrollbar styles (from globals.css) */
+    ::-webkit-scrollbar{width:8px}
+    ::-webkit-scrollbar-track{background:#F0F4F8}
+    ::-webkit-scrollbar-thumb{background:#0F3460;border-radius:4px}
+    ::-webkit-scrollbar-thumb:hover{background:#53E0BC}
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="background:linear-gradient(135deg,var(--dark) 0%,var(--dark-2) 50%,var(--dark) 100%)">
+    <!-- animated background shapes -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="bg-circle-1"></div>
+      <div class="bg-circle-2"></div>
+      <div class="bg-circle-3"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 glass mb-8 fade-in" style="animation-delay:.1s">
+        <div class="w-2 h-2 rounded-full bg-[#53E0BC] pulse-dot"></div>
+        <span class="text-white/80 text-sm tracking-widest uppercase">Agencia Creativa</span>
+      </div>
+
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight tracking-tight fade-up" style="animation-delay:.2s">
+        Creativa<br>
+        <span class="highlight">Marketing</span><br>
+        Studio
+      </h1>
+
+      <p class="text-lg md:text-2xl text-white/70 font-light max-w-2xl mx-auto mt-8" style="animation: floatBob 3s ease-in-out infinite; opacity: .95">
+        Soluciones de diseño y marketing para hacer crecer tu negocio
+      </p>
+
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center fade-in" style="animation-delay:1.2s">
+        <a href="#servicios" class="px-8 py-4 rounded-full font-semibold text-[#0F3460] transition-all hover:scale-105 hover:shadow-2xl" style="background:var(--teal)">Nuestros Servicios</a>
+        <a href="#portafolio" class="px-8 py-4 rounded-full font-semibold text-white border-2 border-white/30 glass hover:bg-white/10 transition-all hover:scale-105">Ver Portafolio</a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 chev-bounce">
+      <svg class="text-white/40" style="width:32px;height:32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="nosotros" class="py-24 px-6" style="background:#F0F4F8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Conócenos</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-3" style="color:var(--dark)">Sobre Nosotros</h2>
+        <div class="w-20 h-1 mx-auto mt-4 rounded-full" style="background:var(--teal)"></div>
+      </div>
+
+      <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+        <p class="text-lg leading-relaxed text-gray-600 mb-4">Somos un equipo de profesionales apasionadas por el <strong style="color:var(--dark)">diseño gráfico</strong> y la <strong style="color:var(--dark)">estrategia digital</strong>. Con más de 5 años de experiencia, ayudamos a pequeñas y medianas empresas a destacar en el mercado.</p>
+        <p class="text-lg leading-relaxed text-gray-600">Nuestro enfoque se basa en la <span class="font-semibold" style="color:var(--teal)">creatividad</span>, la <span class="font-semibold" style="color:var(--teal)">innovación</span> y el <span class="font-semibold" style="color:var(--teal)">compromiso</span> con los resultados.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-16">
+        <!-- Team cards -->
+        <div class="group relative rounded-3xl overflow-hidden shadow-xl card-hover fade-in">
+          <img src="https://media.discordapp.net/attachments/852659859828506644/1477752126607327395/ff3cf15b-b997-42f2-810f-db055baeca22.png?ex=69a5e76a&is=69a495ea&hm=66dc805cc50fd132e3a2630c78c063ecef2ad6017ded2b89dbd5344f98e20221&=&format=webp&quality=lossless&width=1058&height=930" alt="Saray" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/95 via-[#0F3460]/30 to-transparent"></div>
+          <div class="absolute top-5 left-5"><span class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-white" style="background:var(--dark)">CEO</span></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8">
+            <p class="text-white/60 text-sm mb-1 font-medium">CEO & Co-Fundadora</p>
+            <h3 class="text-2xl font-black text-white mb-2">Saray</h3>
+            <p class="text-white/70 text-sm">Líder estratégica con visión creativa y pasión por el branding.</p>
+            <div class="h-0.5 mt-4 rounded-full" style="background:var(--teal);width:40px;transition:width .6s"></div>
+          </div>
+        </div>
+
+        <div class="group relative rounded-3xl overflow-hidden shadow-xl card-hover fade-in" style="animation-delay:.2s">
+          <img src="https://media.discordapp.net/attachments/852659859828506644/1477752033003049061/6426eff1-ea2c-4004-8662-16416f02de03.png?ex=69a5e753&is=69a495d3&hm=c301e46d6a145fe77847e0c3b9ba2550c69824da858ad1e5c44b013e3d032e52&=&format=webp&quality=lossless&width=1240&height=930" alt="Dana" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/95 via-[#0F3460]/30 to-transparent"></div>
+          <div class="absolute top-5 left-5"><span class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider" style="background:var(--teal);color:var(--dark)">COO</span></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8">
+            <p class="text-white/60 text-sm mb-1 font-medium">COO & Co-Fundadora</p>
+            <h3 class="text-2xl font-black text-white mb-2">Dana</h3>
+            <p class="text-white/70 text-sm">Experta en marketing digital y gestión de proyectos con enfoque en resultados.</p>
+            <div class="h-0.5 mt-4 rounded-full" style="background:var(--teal);width:40px;transition:width .6s"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow fade-in flex flex-col items-center justify-center text-center">
+          <svg class="w-6 h-6 mb-3" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><path d="M8.21 13.89l-.21 6.11 3.99-2.26 4 2.26-.2-6.11"></path></svg>
+          <p class="text-2xl font-black mb-1" style="color:var(--dark)">5+</p>
+          <p class="text-xs text-gray-500">Años de Experiencia</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow fade-in flex flex-col items-center justify-center text-center" style="animation-delay:.1s">
+          <svg class="w-6 h-6 mb-3" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <p class="text-2xl font-black mb-1" style="color:var(--dark)">200+</p>
+          <p class="text-xs text-gray-500">Clientes Satisfechos</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow fade-in flex flex-col items-center justify-center text-center" style="animation-delay:.2s">
+          <svg class="w-6 h-6 mb-3" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          <p class="text-2xl font-black mb-1" style="color:var(--dark)">500+</p>
+          <p class="text-xs text-gray-500">Proyectos Completados</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow fade-in flex flex-col items-center justify-center text-center" style="animation-delay:.3s">
+          <svg class="w-6 h-6 mb-3" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6c-1.7-2-4.9-2.1-6.8-.4L12 6.1 9.9 4.2C8 2.4 4.8 2.5 3.1 4.6c-1.9 2.2-1.4 5.9 1 8.4L12 20l7.9-7c2.4-2.5 2.9-6.2 1-8.4z"></path></svg>
+          <p class="text-2xl font-black mb-1" style="color:var(--dark)">100%</p>
+          <p class="text-xs text-gray-500">Pasión y Compromiso</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES (simplified) -->
+  <section id="servicios" class="py-24 px-6" style="background:var(--dark)">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Lo que hacemos</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-3 text-white">Nuestros Servicios</h2>
+        <div class="w-20 h-1 mx-auto mt-4 rounded-full" style="background:var(--teal)"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div class="bg-white/5 glass border border-white/10 rounded-2xl p-8 text-center group transition-transform duration-300">
+          <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+            <svg class="w-8 h-8" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 12 21a3 3 0 0 0 9-8.21z"></path><circle cx="15.5" cy="10.5" r="1"></circle><circle cx="9" cy="8.5" r="1"></circle><circle cx="7.5" cy="14.5" r="1"></circle></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Diseño Gráfico</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Logotipos, materiales impresos, packaging y más.</p>
+        </div>
+        <div class="bg-white/5 glass border border-white/10 rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+            <svg class="w-8 h-8" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.59 13.51L15.42 17.49"></path><path d="M8.59 10.49L15.42 6.51"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Marketing Digital</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Gestión de redes sociales, campañas publicitarias y email marketing.</p>
+        </div>
+        <div class="bg-white/5 glass border border-white/10 rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+            <svg class="w-8 h-8" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2c2.21 4 2.21 16 0 20"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Diseño Web</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Páginas web responsivas y tiendas online.</p>
+        </div>
+        <div class="bg-white/5 glass border border-white/10 rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+            <svg class="w-8 h-8" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M12 2a7 7 0 0 0-4 13v3h8v-3a7 7 0 0 0-4-13z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Consultoría Estratégica</h3>
+          <p class="text-white/60 text-sm leading-relaxed">Planificación de marca y análisis de mercado.</p>
+        </div>
+      </div>
+
+      <!-- Process steps -->
+      <div class="bg-white/5 glass border border-white/10 rounded-3xl p-10 md:p-14">
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center">Nuestro Proceso de Trabajo</h3>
+        <div class="grid md:grid-cols-5 gap-6 relative">
+          <div class="text-center relative">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-black text-xl mb-4" style="background:var(--teal);color:var(--dark)">1</div>
+            <p class="text-white/80 text-sm">Reunión y definición de objetivos.</p>
+            <div class="hidden md:block absolute top-7 left-1/2 w-12 h-1 transform translate-x-full" style="background:var(--teal)"></div>
+          </div>
+          <div class="text-center relative">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-black text-xl mb-4" style="background:var(--teal);color:var(--dark)">2</div>
+            <p class="text-white/80 text-sm">Desarrollo de conceptos y propuestas.</p>
+            <div class="hidden md:block absolute top-7 left-1/2 w-12 h-1 transform translate-x-full" style="background:var(--teal)"></div>
+          </div>
+          <div class="text-center relative">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-black text-xl mb-4" style="background:var(--teal);color:var(--dark)">3</div>
+            <p class="text-white/80 text-sm">Aprobación y ajustes por parte del cliente.</p>
+            <div class="hidden md:block absolute top-7 left-1/2 w-12 h-1 transform translate-x-full" style="background:var(--teal)"></div>
+          </div>
+          <div class="text-center relative">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-black text-xl mb-4" style="background:var(--teal);color:var(--dark)">4</div>
+            <p class="text-white/80 text-sm">Ejecución y entrega del proyecto.</p>
+            <div class="hidden md:block absolute top-7 left-1/2 w-12 h-1 transform translate-x-full" style="background:var(--teal)"></div>
+          </div>
+          <div class="text-center">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-black text-xl mb-4" style="background:var(--teal);color:var(--dark)">5</div>
+            <p class="text-white/80 text-sm">Seguimiento y medición de resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (condensed) -->
+  <section id="precios" class="py-24 px-6" style="background:#F0F4F8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Inversión</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-3" style="color:var(--dark)">Nuestros Paquetes</h2>
+        <div class="w-20 h-1 mx-auto mt-4 rounded-full" style="background:var(--teal)"></div>
+      </div>
+
+      <p class="mt-6 text-gray-500 max-w-xl mx-auto text-center">Elige el plan que mejor se adapte a las necesidades de tu negocio</p>
+
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <!-- Plan: Básico -->
+        <div class="plan-card relative rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500" style="background:white" data-plan="basic">
+          <div class="p-8">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+              <svg class="w-7 h-7" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="plan-title text-xl font-bold" style="color:var(--dark)">Paquete Básico</h3>
+            <div class="mt-4 flex items-baseline gap-1"><span class="plan-price text-5xl font-black" style="color:var(--dark)">$150</span><span class="plan-period text-sm" style="color:#999">USD/mes</span></div>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Diseño logotipo</p><p class="plan-feature-desc text-xs" style="color:#999">1 concepto</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Gestión de redes sociales</p><p class="plan-feature-desc text-xs" style="color:#999">2 redes / 4 publicaciones/mes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Correos electrónicos</p><p class="plan-feature-desc text-xs" style="color:#999">1 campaña/mes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-gray-300" style="color:rgb(209,213,219)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Mantenimiento web</p><p class="plan-feature-desc text-xs" style="color:#999">No incluido</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Análisis y reportes</p><p class="plan-feature-desc text-xs" style="color:#999">Reporte mensual simple</p></div></div>
+            </div>
+
+            <button class="plan-btn mt-8 w-full py-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-500" style="background:var(--dark);color:white">Elegir Plan</button>
+          </div>
+        </div>
+
+        <!-- Plan: Profesional (popular) -->
+        <div class="plan-card relative rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500" style="background:#0F3460;" data-plan="pro">
+          <div class="absolute top-0 left-0 right-0 text-center py-2 text-xs font-bold tracking-widest uppercase text-[#0F3460]" style="background:var(--teal)">Más Popular</div>
+          <div class="p-8 pt-14">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 bg-white/10">
+              <svg class="w-7 h-7" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <h3 class="plan-title text-xl font-bold text-white">Paquete Profesional</h3>
+            <div class="mt-4 flex items-baseline gap-1"><span class="plan-price text-5xl font-black text-white">$350</span><span class="plan-period text-sm text-white/60">USD/mes</span></div>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium text-white">Diseño logotipo</p><p class="plan-feature-desc text-xs text-white/60">3 conceptos + ajustes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium text-white">Gestión de redes sociales</p><p class="plan-feature-desc text-xs text-white/60">4 redes / 8 publicaciones/mes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width"2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium text-white">Campañas publicitarias</p><p class="plan-feature-desc text-xs text-white/60">3 campañas/mes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium text-white">Mantenimiento web</p><p class="plan-feature-desc text-xs text-white/60">Actualizaciones básicas</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium text-white">Análisis y reportes</p><p class="plan-feature-desc text-xs text-white/60">Reporte detallado + reunión virtual</p></div></div>
+            </div>
+
+            <button class="plan-btn mt-8 w-full py-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-500 text-[#0F3460] shadow-lg" style="background:var(--teal);">Elegir Plan</button>
+          </div>
+        </div>
+
+        <!-- Plan: Emprende -->
+        <div class="plan-card relative rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500" style="background:white" data-plan="emprende">
+          <div class="p-8">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:rgba(83,224,188,0.12)">
+              <svg class="w-7 h-7" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l-2 8h18l-2-8-4 4-4-4-4 4-2-4z"></path></svg>
+            </div>
+            <h3 class="plan-title text-xl font-bold" style="color:var(--dark)">Paquete Emprende</h3>
+            <div class="mt-4 flex items-baseline gap-1"><span class="plan-price text-5xl font-black" style="color:var(--dark)">$600</span><span class="plan-period text-sm" style="color:#999">USD/mes</span></div>
+
+            <div class="mt-8 space-y-4">
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Diseño logotipo</p><p class="plan-feature-desc text-xs" style="color:#999">5 conceptos + manual de marca</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Gestión de redes sociales</p><p class="plan-feature-desc text-xs" style="color:#999">5 redes / 12 publicaciones/mes</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Campañas publicitarias</p><p class="plan-feature-desc text-xs" style="color:#999">5 campañas/mes + segmentación</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Mantenimiento web</p><p class="plan-feature-desc text-xs" style="color:#999">Mantenimiento completo + seguridad</p></div></div>
+              <div class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><div><p class="plan-feature text-sm font-medium" style="color:#333">Análisis y reportes</p><p class="plan-feature-desc text-xs" style="color:#999">Reporte avanzado + asesoría presencial</p></div></div>
+            </div>
+
+            <button class="plan-btn mt-8 w-full py-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-500" style="background:var(--dark);color:white">Elegir Plan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="mt-16 bg-white rounded-3xl shadow-lg overflow-hidden fade-in">
+        <div class="p-8">
+          <h3 class="text-2xl font-bold text-center" style="color:var(--dark)">Comparativa de Paquetes</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr style="background:var(--dark)">
+                <th class="text-left py-4 px-6 text-white font-semibold">Características</th>
+                <th class="text-center py-4 px-4 text-white font-semibold">Básico<br/><span class="text-xs font-normal opacity-70">$150/mes</span></th>
+                <th class="text-center py-4 px-4 font-semibold" style="color:var(--teal)">Profesional<br/><span class="text-xs font-normal opacity-70">$350/mes</span></th>
+                <th class="text-center py-4 px-4 text-white font-semibold">Emprende<br/><span class="text-xs font-normal opacity-70">$600/mes</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#F9FAFB">
+                <td class="py-4 px-6 font-medium text-gray-700">Diseño logotipo</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">1 concepto</td>
+                <td class="py-4 px-4 text-center text-gray-700 text-xs font-medium" style="background:rgba(83,224,188,0.08)">3 conceptos + ajustes</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">5 conceptos + manual de marca</td>
+              </tr>
+              <tr style="background:white">
+                <td class="py-4 px-6 font-medium text-gray-700">Redes sociales</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">2 redes / 4 pub./mes</td>
+                <td class="py-4 px-4 text-center text-gray-700 text-xs font-medium" style="background:rgba(83,224,188,0.08)">4 redes / 8 pub./mes</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">5 redes / 12 pub./mes</td>
+              </tr>
+              <tr style="background:#F9FAFB">
+                <td class="py-4 px-6 font-medium text-gray-700">Campañas publicitarias</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">1 campaña/mes</td>
+                <td class="py-4 px-4 text-center text-gray-700 text-xs font-medium" style="background:rgba(83,224,188,0.08)">3 campañas/mes</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">5 campañas/mes + segmentación</td>
+              </tr>
+              <tr style="background:white">
+                <td class="py-4 px-6 font-medium text-gray-700">Mantenimiento web</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">—</td>
+                <td class="py-4 px-4 text-center text-gray-700 text-xs font-medium" style="background:rgba(83,224,188,0.08)">Actualizaciones básicas</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">Completo + seguridad</td>
+              </tr>
+              <tr style="background:#F9FAFB">
+                <td class="py-4 px-6 font-medium text-gray-700">Análisis y reportes</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">Reporte simple</td>
+                <td class="py-4 px-4 text-center text-gray-700 text-xs font-medium" style="background:rgba(83,224,188,0.08)">Detallado + reunión virtual</td>
+                <td class="py-4 px-4 text-center text-gray-500 text-xs">Avanzado + asesoría presencial</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="portafolio" class="py-24 px-6 relative overflow-hidden" style="background:linear-gradient(180deg,#F0F4F8 0%,#E8EEF4 100%)">
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Nuestro Trabajo</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-3" style="color:var(--dark)">Portafolio</h2>
+        <div class="w-20 h-1 mx-auto mt-4 rounded-full" style="background:var(--teal)"></div>
+      </div>
+
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-3 px-8 py-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 cursor-pointer" style="background:linear-gradient(135deg,var(--dark),var(--dark-2))">
+          <svg class="w-5 h-5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6"></path><path d="M12 16v6"></path><path d="M4 8h6"></path><path d="M14 16h6"></path></svg>
+          <span class="text-lg md:text-xl font-bold text-white">¡Descubre nuestros últimos proyectos!</span>
+          <svg class="w-5 h-5" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6"></path><path d="M12 16v6"></path><path d="M4 8h6"></path><path d="M14 16h6"></path></svg>
+        </div>
+      </div>
+
+      <!-- Simple Carousel (vanilla) -->
+      <div class="mb-10 fade-in">
+        <div class="carousel" id="mainCarousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-72 object-cover rounded-lg"/></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1607968565043-36af90dde238?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-72 object-cover rounded-lg"/></div>
+            <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1685661241913-84a6468c8ff2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-72 object-cover rounded-lg"/></div>
+          </div>
+          <div class="carousel-nav">
+            <button class="carousel-btn" id="carouselPrev"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button class="carousel-btn" id="carouselNext"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 mb-10">
+        <div class="group relative rounded-2xl overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1685661241913-84a6468c8ff2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Diseño" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+            <div><span class="text-xs font-semibold tracking-wider uppercase" style="color:var(--teal)">Branding</span><h4 class="text-xl font-bold text-white mt-1">Diseño de Logotipos</h4></div>
+          </div>
+        </div>
+        <div class="group relative rounded-2xl overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1607968565043-36af90dde238?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Campaña" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6"><div><span class="text-xs font-semibold tracking-wider uppercase" style="color:var(--teal)">Marketing Digital</span><h4 class="text-xl font-bold text-white mt-1">Campaña Redes Sociales</h4></div></div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 mb-10">
+        <div class="group relative rounded-2xl overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Web" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6"><div><span class="text-xs font-semibold tracking-wider uppercase" style="color:var(--teal)">Desarrollo Web</span><h4 class="text-xl font-bold text-white mt-1">Diseño Web Responsivo</h4></div></div>
+        </div>
+        <div class="group relative rounded-2xl overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop" alt="Packaging" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F3460]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6"><div><span class="text-xs font-semibold tracking-wider uppercase" style="color:var(--teal)">Diseño Gráfico</span><h4 class="text-xl font-bold text-white mt-1">Diseño de Packaging</h4></div></div>
+        </div>
+      </div>
+
+      <div class="mb-10">
+        <h3 class="text-xl font-bold mb-4" style="color:var(--dark)">Proceso Creativo en Acción</h3>
+        <div class="rounded-2xl overflow-hidden shadow-lg bg-white p-4">
+          <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" alt="Proceso de creación de logotipo - GIF animado" class="w-full max-w-lg mx-auto rounded-xl" />
+          <p class="text-center text-sm text-gray-500 mt-3">Proceso de creación de un logotipo paso a paso</p>
+        </div>
+      </div>
+
+      <div class="mb-10">
+        <h3 class="text-xl font-bold mb-4" style="color:var(--dark)">Inspiración y Tendencias</h3>
+          <a href="#" target="_blank" class="group block relative rounded-2xl overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop" alt="Tendencias" class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-[#0F3460]/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="flex items-center gap-2 bg-white/90 rounded-full px-6 py-3">
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dark)"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span class="font-semibold text-sm" style="color:var(--dark)">Ver imagen original</span>
+            </div>
+          </div>
+        </a>
+        <p class="text-sm text-gray-500 mt-2">Tendencias en Diseño 2026 — Haz clic para ver en tamaño completo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS & RESOURCES (condensed) -->
+  <section id="videos" class="py-24 px-6" style="background:var(--dark)">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-in">
+        <span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Multimedia</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-3 text-white">Videos</h2>
+        <div class="w-20 h-1 mx-auto mt-4 rounded-full" style="background:var(--teal)"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="fade-in">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(83,224,188,0.2)">
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 7.5s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.9 3.8 12 3.8 12 3.8s-4.9 0-6.9.3c-.4.1-1.3.1-2.1 1C2.2 5.8 2 7.5 2 7.5S2 9.3 2 11.1v1.8c0 1.8.2 3.6.2 3.6s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.6.3 7.6.3s4.9 0 6.9-.3c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.8.2-3.6v-1.8c0-1.8-.2-3.6-.2-3.6z"></path><polygon points="10 15 15 12 10 9 10 15"></polygon></svg>
+            </div>
+            <div><h3 class="text-lg font-bold text-white">Presentación del Equipo</h3><p class="text-white/50 text-xs">Video personalizado · 1:30 min</p></div>
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-2xl bg-black/30 border border-white/10">
+            <div class="aspect-video relative"><iframe src="https://www.youtube.com/embed/fW2-H9z39RA" title="Presentación" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          </div>
+          <p class="text-white/40 text-sm mt-3">Conoce a nuestro equipo y los valores que nos impulsan cada día.</p>
+        </div>
+
+        <div class="fade-in">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(83,224,188,0.2)"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 7.5s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.9 3.8 12 3.8 12 3.8s-4.9 0-6.9.3c-.4.1-1.3.1-2.1 1C2.2 5.8 2 7.5 2 7.5S2 9.3 2 11.1v1.8c0 1.8.2 3.6.2 3.6s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.6.3 7.6.3s4.9 0 6.9-.3c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.8.2-3.6v-1.8c0-1.8-.2-3.6-.2-3.6z"></path><polygon points="10 15 15 12 10 9 10 15"></polygon></svg></div>
+            <div><h3 class="text-lg font-bold text-white">Contenido Educativo</h3><p class="text-white/50 text-xs">Video enlazado · YouTube</p></div>
+          </div>
+          <a href="https://youtu.be/fW2-H9z39RA" target="_blank" class="block group"><div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative"><div class="aspect-video"><iframe src="https://www.youtube.com/embed/fW2-H9z39RA" title="5 Errores" class="w-full h-full" allowfullscreen></iframe></div></div></a>
+          <p class="text-white/40 text-sm mt-3">"5 errores comunes en marketing digital que debes evitar"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES (audio) -->
+  <section id="recursos" class="py-24 px-6" style="background:#F0F4F8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 fade-in"><span class="text-sm font-bold tracking-[0.3em] uppercase" style="color:var(--teal)">Audio</span><h2 class="text-4xl md:text-5xl font-black mt-3" style="color:var(--dark)">Recursos</h2></div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--dark),var(--dark-2))"><svg class="w-7 h-7" style="color:var(--teal)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19V6l12-2v13"></path><circle cx="6" cy="18" r="3"></circle></svg></div>
+            <div><h3 class="text-xl font-bold" style="color:var(--dark)">Jingle Corporativo</h3><p class="text-sm text-gray-400">Sonido personalizado</p></div>
+          </div>
+
+          <p class="text-gray-500 text-sm mb-6">Escucha nuestro jingle corporativo — la identidad sonora de Creativa Marketing Studio.</p>
+
+          <div class="rounded-2xl p-5" style="background:linear-gradient(135deg,var(--dark),var(--dark-2))">
+            <div class="flex items-center gap-4">
+              <button id="playBtn" class="w-12 h-12 rounded-full flex items-center justify-center transition-transform hover:scale-110" style="background:var(--teal)" data-tooltip="Reproducir/Pausar">
+                <span id="playIcon" class="w-5 h-5" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
+              </button>
+              <div class="flex-1">
+                <p class="text-white text-sm font-semibold">Hear Me Now</p>
+                <p class="text-white/40 text-xs">Jingle Corporativo - Creativa Marketing</p>
+                <div class="mt-2 progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+                <div class="flex items-center justify-between text-xs text-white/70 mt-2"><span id="currentTime">0:00</span><span id="duration">0:00</span></div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span id="volIcon" class="w-5 h-5 text-white/30" data-tooltip="Silenciar" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19 5a8 8 0 0 1 0 14"></path></svg></span>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://youtu.be/fW2-H9z39RA" target="_blank" class="inline-flex items-center gap-2 mt-4 text-sm font-medium hover:underline" style="color:var(--teal)"><i data-lucide="external-link" class="w-4 h-4"></i>Escuchar en YouTube</a>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--teal),#38B89A)"><svg class="w-7 h-7 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-3a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2z"></path><path d="M3 19a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path></svg></div>
+            <div><h3 class="text-xl font-bold" style="color:var(--dark)">Podcast</h3><p class="text-sm text-gray-400">Enlace a contenido de audio</p></div>
+          </div>
+
+          <div class="rounded-2xl border-2 border-dashed p-6 mb-4" style="border-color:rgba(83,224,188,0.3)">
+            <h4 class="font-bold text-lg" style="color:var(--dark)">Conversaciones Digitales</h4>
+            <p class="text-gray-500 text-sm mt-2 mb-4">Episodio: "Cómo construir una marca fuerte en 2026"</p>
+            <div class="flex items-center gap-3"><button id="podPlay" class="w-10 h-10 rounded-full flex items-center justify-center" style="background:var(--dark)"><svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button><div><p class="text-xs font-semibold" style="color:var(--dark)">Duración: 45 min</p><p class="text-xs text-gray-400">Temporada 2 · Episodio 8</p></div></div>
+          </div>
+
+          <a href="https://youtu.be/fW2-H9z39RA" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium hover:underline" style="color:var(--dark)"><i data-lucide="external-link" class="w-4 h-4"></i>Escuchar podcast completo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast container -->
+  <div id="toastContainer" aria-live="polite"></div>
+
+  <!-- Modal (contact form) -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle" class="text-2xl font-bold mb-2">Contáctanos</h3>
+      <p class="text-sm text-gray-600 mb-4">Envía tu mensaje y te contactaremos pronto.</p>
+      <form id="contactForm">
+        <div class="grid gap-3">
+          <input required name="name" placeholder="Nombre" class="p-3 rounded-md border" />
+          <input required name="email" type="email" placeholder="Correo" class="p-3 rounded-md border" />
+          <textarea name="message" required placeholder="Mensaje" class="p-3 rounded-md border"></textarea>
+          <div class="flex gap-3 justify-end">
+            <button type="button" id="modalClose" class="px-4 py-2 rounded-md" style="background:#eee">Cancelar</button>
+            <button type="submit" class="px-4 py-2 rounded-md" style="background:var(--teal);color:var(--dark)">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="background:linear-gradient(135deg,#0A0A1A 0%,var(--dark) 100%)">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden" style="background:linear-gradient(135deg,var(--teal),#38B89A)">
+        <h2 class="text-3xl md:text-4xl font-black" style="color:var(--dark)">¿Listo para hacer crecer tu marca?</h2>
+        <p class="mt-4 text-lg opacity-80" style="color:var(--dark)">Contáctanos hoy y recibe una asesoría personalizada sin costo</p>
+        <a href="mailto:contacto@creativamarketing.com" class="inline-block mt-8 px-10 py-4 rounded-full font-bold text-white" style="background:var(--dark)">Contáctanos Ahora</a>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 pb-8">
+      <div class="grid md:grid-cols-3 gap-10 pb-10 border-b border-white/10 pt-6">
+        <div>
+          <h3 class="text-xl font-black text-white mb-4">Creativa<span style="color:var(--teal)">.</span></h3>
+          <p class="text-white/40 text-sm leading-relaxed">Soluciones de diseño y marketing para hacer crecer tu negocio.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4">Contacto</h4>
+          <div class="space-y-3 text-white/50 text-sm">
+              <div class="flex items-center gap-3"><svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal)"><path d="M21 10c0 7-9 13-9 13S3 17 3 10A9 9 0 0 1 21 10z"></path><circle cx="12" cy="10" r="3"></circle></svg>Bucaramanga, Santander - Colombia</div>
+              <div class="flex items-center gap-3"><svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal)"><path d="M22 16.92V21a1 1 0 0 1-1.11 1 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2 3.11 1 1 0 0 1 3 2h4.09a1 1 0 0 1 1 .75c.12.58.29 1.14.5 1.67a1 1 0 0 1-.25 1.05L7.91 8.09a16 16 0 0 0 6 6l1.61-1.43a1 1 0 0 1 1.05-.25c.53.21 1.09.38 1.67.5a1 1 0 0 1 .75 1V21z"></path></svg>(7) XXX-XXXX</div>
+              <div class="flex items-center gap-3"><svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal)"><path d="M4 4h16v16H4z"></path><path d="M22 6l-10 7L2 6"></path></svg>contacto@creativamarketing.com</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="pt-8 text-center"><p class="text-white/30 text-sm">© 2026 Creativa Marketing Studio | Bucaramanga, Santander - Colombia</p></div>
+    </div>
+  </footer>
+
+  <!-- hidden audio element -->
+  <audio id="audioTrack" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="none"></audio>
+
+  <script>
+    // render lucide icons if available
+    if(window.lucide) window.lucide.createIcons();
+
+    // simple play/pause behavior and progress bar
+    const playBtn = document.getElementById('playBtn');
+    const audio = document.getElementById('audioTrack');
+    const playIcon = document.getElementById('playIcon');
+    const progressFill = document.getElementById('progressFill');
+    let progressInterval = null;
+
+    function updateProgress(){
+      if(!audio.duration || isNaN(audio.duration)) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = pct + '%';
+    }
+
+    // Play/pause icon swapping using inline SVGs
+    const playSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+    const pauseSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+    function setPlayIcon(state){ playIcon.innerHTML = state === 'pause' ? pauseSvg : playSvg; }
+
+    playBtn.addEventListener('click', ()=>{
+      if(audio.paused){
+        audio.play();
+        setPlayIcon('pause');
+        progressInterval = setInterval(updateProgress, 500);
+      } else {
+        audio.pause();
+        setPlayIcon('play');
+        clearInterval(progressInterval);
+      }
+    });
+
+    audio.addEventListener('ended', ()=>{
+      setPlayIcon('play');
+      clearInterval(progressInterval);
+      progressFill.style.width = '0%';
+    });
+
+    // simple podcast button feedback and control reuse of audio track
+    const podBtn = document.getElementById('podPlay');
+    if(podBtn) {
+      podBtn.addEventListener('click', ()=>{
+        if(audio.paused) {
+          audio.currentTime = 0;
+          audio.play();
+          setPlayIcon('pause');
+          progressInterval = setInterval(updateProgress, 500);
+          showToast('Reproduciendo podcast...', { duration: 3000 });
+        } else {
+          audio.pause();
+          setPlayIcon('play');
+          clearInterval(progressInterval);
+          showToast('Pausado', { duration: 2000 });
+        }
+      });
+    }
+
+    // Plan card interactivity
+    const planCards = document.querySelectorAll('.plan-card');
+    let selectedPlan = null;
+
+    planCards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Remove previous selection
+        if(selectedPlan) {
+          const prevPlan = selectedPlan.dataset.plan;
+          selectedPlan.style.background = prevPlan === 'pro' ? '#0F3460' : 'white';
+          selectedPlan.style.transform = 'scale(1)';
+          selectedPlan.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1)';
+          
+          // Reset text colors
+          selectedPlan.querySelectorAll('.plan-title, .plan-price, .plan-period, .plan-feature, .plan-feature-desc').forEach(el => {
+            if(prevPlan === 'pro') {
+              el.style.color = el.classList.contains('plan-title') ? 'white' : el.classList.contains('plan-price') ? 'white' : el.classList.contains('plan-period') ? 'rgba(255,255,255,0.6)' : el.classList.contains('plan-feature') ? 'white' : 'rgba(255,255,255,0.6)';
+            } else {
+              el.style.color = el.classList.contains('plan-title') ? 'var(--dark)' : el.classList.contains('plan-price') ? 'var(--dark)' : el.classList.contains('plan-period') ? '#999' : el.classList.contains('plan-feature') ? '#333' : '#999';
+            }
+          });
+          
+          // Reset button
+          const prevBtn = selectedPlan.querySelector('.plan-btn');
+          prevBtn.style.background = prevPlan === 'pro' ? 'var(--teal)' : 'var(--dark)';
+          prevBtn.style.color = prevPlan === 'pro' ? 'var(--dark)' : 'white';
+        }
+        
+        // Apply new selection
+        selectedPlan = card;
+        card.style.background = 'linear-gradient(135deg, #53E0BC, #38B89A)';
+        card.style.transform = 'scale(1.05)';
+        card.style.boxShadow = '0 20px 50px rgba(83, 224, 188, 0.4)';
+        
+        // Change text colors to white
+        card.querySelectorAll('.plan-title, .plan-price, .plan-period, .plan-feature, .plan-feature-desc').forEach(el => {
+          el.style.color = 'white';
+        });
+        
+        // Change button to white with teal text
+        const btn = card.querySelector('.plan-btn');
+        btn.style.background = 'white';
+        btn.style.color = 'var(--teal)';
+      });
+    });
+
+    /* Toast system */
+    const toastContainer = document.getElementById('toastContainer');
+    function showToast(message, { type = 'default', duration = 3500 } = {}){
+      const el = document.createElement('div');
+      el.className = 'toast ' + (type === 'success' ? 'success' : '');
+      el.innerHTML = ` <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg><div style="flex:1">${message}</div><div class="close" aria-hidden><svg class=\"w-4 h-4\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line></svg></div>`;
+      toastContainer.appendChild(el);
+      const closer = el.querySelector('.close');
+      closer.addEventListener('click', ()=>{ el.remove(); });
+      setTimeout(()=>{ if(document.body.contains(el)) el.remove(); }, duration);
+    }
+
+    /* Modal (contact) */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalClose = document.getElementById('modalClose');
+    const contactForm = document.getElementById('contactForm');
+    document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+      // hijack main CTA to open modal too
+      a.addEventListener('click', (e)=>{ e.preventDefault(); modalBackdrop.style.display = 'flex'; });
+    });
+    modalClose.addEventListener('click', ()=> modalBackdrop.style.display = 'none');
+    contactForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      modalBackdrop.style.display = 'none';
+      showToast('Mensaje enviado. Gracias.', { type: 'success' });
+      contactForm.reset();
+    });
+
+    /* Carousel */
+    (function(){
+      const track = document.getElementById('carouselTrack');
+      const slides = track.children;
+      let idx = 0;
+      const prev = document.getElementById('carouselPrev');
+      const next = document.getElementById('carouselNext');
+      function update(){ track.style.transform = `translateX(-${idx * 100}%)`; }
+      prev.addEventListener('click', ()=>{ idx = (idx - 1 + slides.length) % slides.length; update(); });
+      next.addEventListener('click', ()=>{ idx = (idx + 1) % slides.length; update(); });
+      setInterval(()=>{ idx = (idx + 1) % slides.length; update(); }, 5000);
+    })();
+
+    /* Enhanced audio controls */
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const volIcon = document.getElementById('volIcon');
+    function formatTime(t){ const mm = Math.floor(t/60); const ss = Math.floor(t%60).toString().padStart(2,'0'); return `${mm}:${ss}`; }
+    audio.addEventListener('loadedmetadata', ()=>{ durationEl.textContent = formatTime(audio.duration); });
+    audio.addEventListener('timeupdate', ()=>{ currentTimeEl.textContent = formatTime(audio.currentTime); updateProgress(); });
+    volIcon.addEventListener('click', ()=>{ audio.muted = !audio.muted; volIcon.style.opacity = audio.muted ? 0.4 : 1; });
+
+    /* Quick sample usages for toasts */
+    // showToast('Bienvenido a Creativa Marketing Studio', { duration: 4000 });
+
+    // Ensure lucide icons are visible even if lucide script fails to run
+    async function inlineLucideIcons() {
+      const icons = Array.from(document.querySelectorAll('i[data-lucide]'));
+      await Promise.all(icons.map(async (el) => {
+        const name = el.getAttribute('data-lucide');
+        if(!name) return;
+        try {
+          const res = await fetch(`https://unpkg.com/lucide@0.244.0/dist/icons/${name}.svg`);
+          if(!res.ok) return;
+          let svg = await res.text();
+          // preserve classes and inline size
+          const cls = el.getAttribute('class') || '';
+          svg = svg.replace('<svg', `<svg class="${cls}"`);
+          el.outerHTML = svg;
+        } catch (e) {
+          // fallback: leave element as-is
+          console.warn('Could not fetch icon', name, e);
+        }
+      }));
+    }
+
+    // If lucide is available, render icons; otherwise inline them
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    } else {
+      inlineLucideIcons();
+    }
+  </script>
+</body>
+</html>
